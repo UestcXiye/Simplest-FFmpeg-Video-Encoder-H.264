@@ -1,27 +1,27 @@
-// Simplest FFmpeg Video Encoder H.264.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// Simplest FFmpeg Video Encoder H.264.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 /**
-* ×î¼òµ¥µÄ»ùÓÚ FFmpeg µÄÊÓÆµ±àÂëÆ÷
+* æœ€ç®€å•çš„åŸºäº FFmpeg çš„è§†é¢‘ç¼–ç å™¨
 * Simplest FFmpeg Video Encoder
 *
-* Ô´³ÌĞò£º
-* À×Ïöæè Lei Xiaohua
+* æºç¨‹åºï¼š
+* é›·éœ„éª… Lei Xiaohua
 * leixiaohua1020@126.com
-* ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+* ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
 * Communication University of China / Digital TV Technology
 * http://blog.csdn.net/leixiaohua1020
 *
-* ĞŞ¸Ä£º
-* ÁõÎÄ³¿ Liu Wenchen
+* ä¿®æ”¹ï¼š
+* åˆ˜æ–‡æ™¨ Liu Wenchen
 * 812288728@qq.com
-* µç×Ó¿Æ¼¼´óÑ§/µç×ÓĞÅÏ¢
+* ç”µå­ç§‘æŠ€å¤§å­¦/ç”µå­ä¿¡æ¯
 * University of Electronic Science and Technology of China / Electronic and Information Science
 * https://blog.csdn.net/ProgramNovice
 *
-* ±¾³ÌĞòÊµÏÖÁË YUV ÏñËØÊı¾İ±àÂëÎªÊÓÆµÂëÁ÷£¨H264£¬MPEG2£¬VP8 µÈµÈ£©¡£
-* ÊÇ×î¼òµ¥µÄ FFmpeg ÊÓÆµ±àÂë·½ÃæµÄ½Ì³Ì¡£
-* Í¨¹ıÑ§Ï°±¾Àı×Ó¿ÉÒÔÁË½â FFmpeg µÄ±àÂëÁ÷³Ì¡£
+* æœ¬ç¨‹åºå®ç°äº† YUV åƒç´ æ•°æ®ç¼–ç ä¸ºè§†é¢‘ç æµï¼ˆH264ï¼ŒMPEG2ï¼ŒVP8 ç­‰ç­‰ï¼‰ã€‚
+* æ˜¯æœ€ç®€å•çš„ FFmpeg è§†é¢‘ç¼–ç æ–¹é¢çš„æ•™ç¨‹ã€‚
+* é€šè¿‡å­¦ä¹ æœ¬ä¾‹å­å¯ä»¥äº†è§£ FFmpeg çš„ç¼–ç æµç¨‹ã€‚
 *
 * This software encode YUV420P data to H.264 bitstream.
 * It's the simplest video encoding software based on FFmpeg.
@@ -34,14 +34,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// ½â¾ö±¨´í£ºfopen() º¯Êı²»°²È«
+// è§£å†³æŠ¥é”™ï¼šfopen() å‡½æ•°ä¸å®‰å…¨
 #pragma warning(disable:4996)
 
-// ½â¾ö±¨´í£ºÎŞ·¨½âÎöµÄÍâ²¿·ûºÅ __imp__fprintf£¬¸Ã·ûºÅÔÚº¯Êı _ShowError ÖĞ±»ÒıÓÃ
+// è§£å†³æŠ¥é”™ï¼šæ— æ³•è§£æçš„å¤–éƒ¨ç¬¦å· __imp__fprintfï¼Œè¯¥ç¬¦å·åœ¨å‡½æ•° _ShowError ä¸­è¢«å¼•ç”¨
 #pragma comment(lib, "legacy_stdio_definitions.lib")
 extern "C"
 {
-	// ½â¾ö±¨´í£ºÎŞ·¨½âÎöµÄÍâ²¿·ûºÅ __imp____iob_func£¬¸Ã·ûºÅÔÚº¯Êı _ShowError ÖĞ±»ÒıÓÃ
+	// è§£å†³æŠ¥é”™ï¼šæ— æ³•è§£æçš„å¤–éƒ¨ç¬¦å· __imp____iob_funcï¼Œè¯¥ç¬¦å·åœ¨å‡½æ•° _ShowError ä¸­è¢«å¼•ç”¨
 	FILE __iob_func[3] = { *stdin, *stdout, *stderr };
 }
 
@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
 
 	av_register_all();
 
-	// Method1
+	// Method 1
 	// pFormatCtx = avformat_alloc_context();
 	// fmt = av_guess_format(NULL, out_file, NULL); // Guess Format
 	// pFormatCtx->oformat = fmt;
@@ -146,7 +146,7 @@ int main(int argc, char* argv[])
 	avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, out_file);
 	fmt = pFormatCtx->oformat;
 
-	//Open output URL
+	// Open output URL
 	ret = avio_open(&pFormatCtx->pb, out_file, AVIO_FLAG_READ_WRITE);
 	if (ret < 0)
 	{
